@@ -24,7 +24,7 @@ public class KeepImpl implements KeepService {
      * <li> {@code 歌曲不存在: "-3"}</li>
      * <li> {@code 输入非法: "-2"}</li>
      * <li> {@code 用户没有操作权限: "-1"}</li>
-     * <li> {@code 数据库错误: "0"}</li>
+     * <li> {@code 歌曲已存在: "0"}</li>
      * <li> {@code 保存歌曲成功: "1"}</li>
      */
     public String KeepSong(String songid,String songlistid, String userid){
@@ -35,7 +35,8 @@ public class KeepImpl implements KeepService {
         map.put("songlistid",songlistid);
         map.put("songid",songid);
         songMapper.getSongById(map);
-        Song song = map.get("songs") == null ? null: ((ArrayList<Song>)map.get("songs")).get(0);
+        ArrayList<Song>songs =  (ArrayList<Song>)map.get("songs");
+        Song song = songs == null || songs.size() == 0 ? null: songs.get(0);
         if (song == null) {
             return "-3";
         }
@@ -69,13 +70,34 @@ public class KeepImpl implements KeepService {
         songListMapper.unKeepSongList(map);
         return (String)map.get("succ");
     }
+
+    /**
+     * @return {@code 输入非法: "-2"}
+     * <li> {@code 用户是歌单创建人无法收藏 "-1"} </li>
+     * <li> {@code 歌单不存在 "-3"} </li>
+     * <li> {@code 歌单已经收藏了 "0"} </li>
+     * <li> {@code 收藏成功 "1"} </li>
+     */
     public String KeepSongList(String songlistid,String userid){
+        if (songlistid ==null || userid == null) {
+            return "-2";
+        }
         Map<String,Object> map = new HashMap<>();
         map.put("songlistid",songlistid);
+        songListMapper.getSongListById(map);
+        ArrayList<SongList> songLists = (ArrayList<SongList>)map.get("songlist");
+        SongList songlist = songLists != null && songLists.size() != 0 ? songLists.get(0) : null;
+        if (songlist == null) {
+            return "-3";
+        }
+        if (songlist.getUserid().equals(userid)) {
+            return "-1";
+        }
         map.put("userid",userid);
         songListMapper.keepSongList(map);
         return (String)map.get("succ");
     }
+
     public String unKeepSong(String songid,String songlistid){
         Map<String,Object> map = new HashMap<>();
         map.put("songlistid",songlistid);

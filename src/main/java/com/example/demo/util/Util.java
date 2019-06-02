@@ -6,8 +6,11 @@ import com.example.demo.entity.Song;
 import java.util.*;
 
 public  class  Util {
-    public static String getSongListStyle(ArrayList<Song> songs){
-        class Group{
+    public static String getSongListStyle(ArrayList<Song> songs) {
+        if (songs == null || songs.size() == 0) {
+            return " ";
+        }
+        class Group {
             String index;
             int num;
         }
