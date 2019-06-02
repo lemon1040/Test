@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.AdminMapper">
+  <resultMap id="AdminResultMap" type="com.example.demo.entity.Admin">
+    <id column="ADMINID" jdbcType="VARCHAR" property="adminid" />
+    <result column="ADMINNAME" jdbcType="VARCHAR" property="adminname" />
+    <result column="ADMINPASSWORD" jdbcType="VARCHAR" property="adminpassword" />
+    <result column="ADMINIMAGE" jdbcType="VARCHAR" property="adminimage" />
+  </resultMap>
+
+    <select id="isAdminExit" parameterType="java.util.Map" resultType="java.util.Map" statementType="CALLABLE">
+        call ADMIN_PKG.IS_ADMIN_EXIST(#{adminid,jdbcType=VARCHAR,mode=IN},#{adminpassword,jdbcType=VARCHAR,mode=IN},#{result,jdbcType=VARCHAR,mode=OUT})
+    </select>
+    <select id="getAdminById" parameterType="java.util.HashMap" statementType="CALLABLE">
+        call ADMIN_PKG.get_admin(#{adminid,mode=IN,jdbcType=VARCHAR},#{admin,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=	AdminResultMap})
+    </select>
+</mapper>

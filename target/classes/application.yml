@@ -1,0 +1,14 @@
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@111.230.63.192:1521:orcl
+    username: music
+    password: music
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  config-location: classpath:mybatis-config.xml
+  type-aliases-package: com.example.demo.entity
+
+

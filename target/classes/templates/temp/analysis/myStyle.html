@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        .bg1,.bg2,.bg3,.bg4,.bg5{
+            position:relative;
+            padding-left: 50px;
+            padding-top: 20px;
+            width:800px;
+            height:30px;
+            background-color:#FFF;
+        }
+        .bg1:before{
+            content: "[[${electric}]]";
+            position:absolute;
+            top:25px;
+            left:200px;
+            font:bold 20px/1.2 "SimHei";
+            color:rgb(255, 215, 0);
+        }
+        .bg2:before{
+            content: "[[${pop}]]";
+            position:absolute;
+            top:25px;
+            left:200px;
+            font:bold 20px/1.2 "SimHei";
+            color:rgb(255, 169, 28);
+        }
+        .bg3:before{
+            content: "[[${classic}]]";
+            position:absolute;
+            top:25px;
+            left:200px;
+            font:bold 20px/1.2 "SimHei";
+            color:rgb(255, 145, 43);
+        }
+        .bg4:before{
+            content: "[[${hap}]]";
+            position:absolute;
+            top:25px;
+            left:200px;
+            font:bold 20px/1.2 "SimHei";
+            color:rgb(255, 122, 57);
+        }
+        .bg5:before{
+            content: "[[${rap}]]";
+            position:absolute;
+            top:25px;
+            left:200px;
+            font:bold 20px/1.2 "SimHei";
+            color:rgb(255, 99, 71);
+        }
+        .text1,.text2,.text3,.text4,.text5 {
+            width : 0;
+            height: 30px;
+            position:absolute;
+            background:#c60;
+            overflow: hidden;
+        }
+        .text1{
+            background:rgb(255, 215, 0);
+        }
+        .text2{
+            background:rgb(255, 169, 28);
+        }
+        .text3{
+            background:rgb(255, 145, 43);
+        }
+        .text4{
+            background:rgb(255, 122, 57);
+        }
+        .text5{
+            background:rgb(255, 99, 71);
+        }
+        .anim1{
+            animation:anicolor1 2s cubic-bezier(1,0,1,1) .2s 1 alternate forwards;
+        }
+        .anim2{
+            animation:anicolor2 2s cubic-bezier(1,0,1,1) .2s 1 alternate forwards;
+        }
+        .anim3{
+            animation:anicolor3 2s cubic-bezier(1,0,1,1) .2s 1 alternate forwards;
+        }
+        .anim4{
+            animation:anicolor4 2s cubic-bezier(1,0,1,1) .2s 1 alternate forwards;
+        }
+        .anim5{
+            animation:anicolor5 2s cubic-bezier(1,0,1,1) .2s 1 alternate forwards;
+        }
+        .text1:before {
+            content: "[[${electric}]]";
+            position:absolute;
+            top:5px;
+            left:150px;
+            font:bold 20px/1.2 "SimHei";
+            color:#FFF;
+        }
+        .text2:before {
+            content: "[[${pop}]]";
+            position:absolute;
+            top:5px;
+            left:150px;
+            font:bold 20px/1.2 "SimHei";
+            color:#FFF;
+        }
+        .text3:before {
+            content: "[[${classic}]]";
+            position:absolute;
+            top:5px;
+            left:150px;
+            font:bold 20px/1.2 "SimHei";
+            color:#FFF;
+        }
+        .text4:before {
+            content: "[[${hap}]]";
+            position:absolute;
+            top:5px;
+            left:150px;
+            font:bold 20px/1.2 "SimHei";
+            color:#FFF;
+        }
+        .text5:before {
+            content: "[[${rap}]]";
+            position:absolute;
+            top:5px;
+            left:150px;
+            font:bold 20px/1.2 "SimHei";
+            color:#FFF;
+        }
+        .title{
+            padding-top: 20px;
+            font-size: 16px;
+            font-family: poppin,Tahoma,Arial,微软雅黑,sans-serif;
+        }
+        .type_title{
+            position:absolute;
+            left:1px;
+            top:22px;
+            font-size: 16px;
+            font-family: poppin,Tahoma,Arial,微软雅黑,sans-serif;
+        }
+        @keyframes anicolor1{
+            from{width:0;}
+            to{width:/*<![CDATA[*/[[${electric}]] /*]]>*/;}
+        }
+        @keyframes anicolor2{
+            from{width:0;}
+            to{width:/*<![CDATA[*/[[${pop}]] /*]]>*/;}
+        }
+        @keyframes anicolor3{
+            from{width:0;}
+            to{width:/*<![CDATA[*/[[${classic}]] /*]]>*/;}
+        }
+        @keyframes anicolor4{
+            from{width:0;}
+            to{width:/*<![CDATA[*/[[${hap}]] /*]]>*/;}
+        }
+        @keyframes anicolor5{
+            from{width:0;}
+            to{width:/*<![CDATA[*/[[${rap}]] /*]]>*/;}
+        }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>个人主页</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/PersonalMessage.css" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet">
+    <script src="/JS/jquery-3.3.1.min.js"></script>
+    <script src="/JS/bootstrap.min.js"></script>
+    <script src="/JS/main_js.js"></script>
+</head>
+<body>
+<p class="title">听歌情况</p>
+<li>
+    <div class="bg1">
+        <p class="type_title">电子</p>
+        <div class="text1 anim1"></div>
+    </div>
+</li>
+<li style="margin-top: 20px">
+    <div class="bg2">
+        <p class="type_title">流行</p>
+        <div class="text2 anim2"></div>
+    </div>
+</li>
+</li>
+<li style="margin-top: 20px">
+    <div class="bg3">
+        <p class="type_title">古典</p>
+        <div class="text3 anim3"></div>
+    </div>
+</li>
+<li style="margin-top: 20px">
+    <div class="bg4">
+        <p class="type_title">嘻哈</p>
+        <div class="text4 anim4"></div>
+    </div>
+</li>
+<li style="margin-top: 20px">
+    <div class="bg5">
+        <p class="type_title">摇滚</p>
+        <div class="text5 anim5"></div>
+    </div>
+</li>
+</body>
+</html>
