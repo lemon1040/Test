@@ -25,5 +25,6 @@ public interface UserService {
     ArrayList<User> getRecommendUser(String userid);
     List<Integer> getFriendPoint(String userid);
     double getPercent(String type);
-
+    String LoginFilter(String id, String pwd);
+    String RegisterFilter(String pwd);
 }

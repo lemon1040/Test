@@ -1,4 +1,4 @@
-package com.example.demo.service.Impl;
+﻿package com.example.demo.service.Impl;
 
 import com.example.demo.dao.AlbumMapper;
 import com.example.demo.dao.SongListMapper;
@@ -25,8 +25,45 @@ public class UserImpl implements UserService {
     @Resource
     private SongMapper songMapper;
 
+@Override
+    public String LoginFilter(String id, String pwd) {
+    	String msg="true";
+    	if(id.equals("")||pwd.equals(""))
+    		msg="用户名和密码不能为空";
+    	else if(id.length()!=6||!id.matches("[0-9]{1,}"))
+    		msg="id应由6位数字组成";
+    	else if(pwd.length()>8)
+    		msg="密码应不超过8位";
+    	else if(!pwd.matches("\"^(?![a-zA-z]+$)(?!\\\\d+$)(?![!@#$%^&*]+$)[a-zA-Z\\\\d!@#$%^&*]+$\""))
+    		msg="密码应至少包含一个数字和字母";
+    	else if(pwd.replaceAll("[a-z]*[A-Z]*\\d*-*_*\\s*", "").length()!=0)
+    		msg="密码不能包含特殊字符";
+    	else if(!id.matches("[0-9a-zA-Z\u4E00-\u9FA5]+")||!pwd.matches("[0-9a-zA-Z\u4E00-\u9FA5]+"))
+    		msg="id和密码不能包含空格";
+    	return msg;
+    }
+    
+    @Override
+    public String RegisterFilter(String pwd) {
+    	String msg="true";
+    	if(pwd.equals(""))
+    		msg="密码不能为空";
+    	else if(pwd.length()>8)
+    		msg="密码应不超过8位";
+    	else if(!pwd.matches("\"^(?![a-zA-z]+$)(?!\\\\d+$)(?![!@#$%^&*]+$)[a-zA-Z\\\\d!@#$%^&*]+$\""))
+    		msg="密码应至少包含一个数字和字母";
+    	else if(pwd.replaceAll("[a-z]*[A-Z]*\\d*-*_*\\s*", "").length()!=0)
+    		msg="密码不能包含特殊字符";
+    	else if(!pwd.matches("[0-9a-zA-Z\u4E00-\u9FA5]+"))
+    		msg="密码不能包含空格";
+    	return msg;
+    }
+
     @Override
     public ResultEntity SignIn(User user) {
+	String msg = LoginFilter(user.getUserid(),user.getUserpassword());
+	if(msg!="true")
+    		return new ResultEntity(false,msg,null);
         Map<String,Object>map = new HashMap<>();
         map.put("userid",user.getUserid());
         map.put("userpassword",user.getUserpassword());
@@ -47,6 +84,9 @@ public class UserImpl implements UserService {
 
     @Override
     public ResultEntity Register(User user){
+	String msg = RegisterFilter(user.getUserpassword());
+    	if(msg!="true")
+    		return new ResultEntity(false,msg,null);
         Map<String,Object> map = new HashMap<>();
         map.put("username",user.getUsername());
         map.put("userpassword",user.getUserpassword());
