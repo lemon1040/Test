@@ -27,14 +27,14 @@ public  class  Util {
         int countIndex = 0;
         for(Song song:songs){
             //如果这个值运算过 不再运算
-            if (resultMap.get(song.getSongname()) != null) {
+            if (resultMap.get(song.getSongschool()) != null) {
                 countIndex++;
                 continue;
             }
             Group group = new Group();
             group.index = song.getSongschool();
             for (int i = countIndex; i < songs.size(); i++) {
-                if (song.getSongname().equals(group.index)) {
+                if (songs.get(i).getSongschool().equals(group.index)) {
                     group.num++;
                 }
             }
